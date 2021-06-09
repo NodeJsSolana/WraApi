@@ -1,7 +1,7 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard,  IonCardContent, IonItem} from '@ionic/react';
-import React,{useState,useEffect, Component} from 'react';
+import { IonContent,IonList, IonItem, IonLabel, IonListHeader} from '@ionic/react';
+import React, { Component} from 'react';
 import axios from 'axios';
-import { person, personSharp } from 'ionicons/icons';
+
 
 class Water extends Component{
     
@@ -22,13 +22,27 @@ class Water extends Component{
 
     render(){
 
-        const { persons } = this.state;
+        
 
         return(
             <IonContent>
+                <IonListHeader>
+                    <IonLabel><h1>測站名稱</h1></IonLabel>
+                </IonListHeader>
                 
-
-                
+                <IonList>
+                    <IonItem>
+                        <IonLabel>
+                            {
+                                this.state.persons.map((post:any, key) =>{
+                                return(
+                                    <li key={key}>{post.StationName}</li>
+                                )
+                                })
+                            }
+                        </IonLabel>
+                    </IonItem>
+                </IonList>    
             </IonContent>
         )
     }
@@ -36,5 +50,3 @@ class Water extends Component{
 }
 
 export default Water;
-
-//https://www.techiediaries.com/react-ionic-axios-tutorial/
