@@ -1,34 +1,53 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard,  IonCardContent, IonItem} from '@ionic/react';
-import React,{useState,useEffect, Component} from 'react';
+import { IonContent,IonList, IonItem, IonLabel, IonListHeader, IonHeader, IonToolbar, IonTitle, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItemSliding, IonItemOptions, IonItemOption, IonCardContent, IonButton, IonPage, IonGrid, IonRow, IonCol} from '@ionic/react';
+import { Component} from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
-import { person, personSharp } from 'ionicons/icons';
+import "./Water.css"
+import tab1 from './tab1'
+
+
 
 class Water extends Component{
     
     // API_URL = 'https://fhy.wra.gov.tw/WraApi/v1/Reservoir/RealTimeInfo?$top=30'
 
     state = {
-        persons: [],
+        item: []
     }
 
     componentDidMount() {
-        axios.get(`https://fhy.wra.gov.tw/WraApi/v1/Water/Station`)
+        axios.get(`https://fhy.wra.gov.tw/WraApi/v1/Reservoir/Station?$orderby=StationNo`)
         .then(res => {
         console.log(res)
-        const persons = res.data;
-        this.setState({ persons });
+        const item = res.data;
+        this.setState({ item });
         })
     }
 
     render(){
-
-        const { persons } = this.state;
-
         return(
             <IonContent>
-                
-
-                
+                <IonGrid>
+                    <IonRow>
+                        <IonCol>
+                            <div>
+                                <h5>水庫名稱</h5>
+                                {
+                                    this.state.item.map((post:any, key) =>{
+                                        return(
+                                            
+                                                <IonButton expand="full" key={key}>
+                                                    <Link to= {`/tab1/${post.StationNo}`}>
+                                                        <h2>{post.StationName}</h2>
+                                                    </Link>
+                                                </IonButton>
+                                            )
+                                        })
+                                }
+                            </div>
+                        </IonCol>
+                    </IonRow>
+                </IonGrid>
             </IonContent>
         )
     }
@@ -37,4 +56,10 @@ class Water extends Component{
 
 export default Water;
 
-//https://www.techiediaries.com/react-ionic-axios-tutorial/
+// {
+//     this.state.item.map((post:any, key) =>{
+//     return(
+//         <li key={key}>{post.StationName}</li>
+//         )
+//     })
+// }

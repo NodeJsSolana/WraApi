@@ -1,11 +1,9 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-
-import { IonButton, IonList, IonItem } from '@ionic/react';
-import axios from 'axios';
-
+import Tab from '../components/tab1'
 import './Tab1.css';
 
 const Tab1: React.FC = () => {
+
   return (
     <IonPage>
       <IonHeader>
@@ -19,7 +17,7 @@ const Tab1: React.FC = () => {
             <IonTitle size="large">Tab 1</IonTitle>
           </IonToolbar>
         </IonHeader>
-        
+        <Tab/>
       </IonContent>
     </IonPage>
   );
