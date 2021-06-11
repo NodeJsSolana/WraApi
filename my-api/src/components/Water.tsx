@@ -3,7 +3,6 @@ import { Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import "./Water.css"
-import tab1 from './tab1'
 
 
 
@@ -31,7 +30,6 @@ class Water extends Component{
                     <IonRow>
                         <IonCol>
                             <div>
-                                <h5>水庫名稱</h5>
                                 {
                                     this.state.item.map((post:any, key) =>{
                                         return(

@@ -1,21 +1,19 @@
 import { Component} from 'react';
-import axios from 'axios';
 
 
-class Tab extends Component{
 
-    state = {
-        item: []
-    }
 
-    componentDidMount() {
-        console.log()
+
+class Tab extends Component<any>{
+
+    
+    componentDidMount(){
+        console.log(this.props.match.params.id)
     }
 
     render(){
         return(
             <div>
-                ok
             </div>
         )
     }
