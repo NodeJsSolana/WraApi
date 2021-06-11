@@ -1,0 +1,38 @@
+import React, { Component } from "react";  
+import axios from 'axios';
+class ExploreContainer extends Component{
+
+
+  state = {
+    items: []
+  }
+
+  componentDidMount() {
+     axios.get(`https://script.google.com/macros/s/AKfycbxTtz5XuUse7n2TwgBnuETpg0SX-_93Ns60nnNEo1dv7xEViOUxGUFUlRTNPvTiNRwv/exec`)
+        .then(res => {
+        console.log(res)
+        const items = res.data;
+        this.setState({ items });
+        })
+  }
+    render(){
+      const reservoirLists = ['新山水庫', '翡翠水庫', '石門水庫', '永和山水庫', '寶山水庫', '寶山第二水庫', '明德水庫', '鯉魚潭水庫'
+            , '德基水庫', '石岡壩', '日月潭水庫', '霧社水庫', '湖山水庫', '仁義潭水庫', '蘭潭水庫'
+            , '白河水庫', '曾文水庫', '烏山頭水庫', '南化水庫', '阿公店水庫', '牡丹水庫']
+      return(
+        <div>
+          {
+            reservoirLists.map(reservoirList => (
+              <li key={reservoirList}>
+                
+              </li>
+            ))
+          }
+        </div>
+      )
+    }
+
+}
+
+
+export default ExploreContainer;
