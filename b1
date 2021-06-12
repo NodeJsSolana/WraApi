@@ -1,0 +1,46 @@
+import React, { Component } from "react";  
+import axios from 'axios';
+class ExploreContainer extends Component{
+
+
+  // state = {
+  //   items: []
+  // }
+
+  componentDidMount() {
+    
+  }
+
+  renderLists(){
+    const items:any = []
+    axios.get(`https://script.google.com/macros/s/AKfycbxTtz5XuUse7n2TwgBnuETpg0SX-_93Ns60nnNEo1dv7xEViOUxGUFUlRTNPvTiNRwv/exec`)
+      .then((response) => {
+        var dataObject = response.data;
+        items.push(dataObject)
+      })
+    const userList:any = [];
+    const reservoirList = ['新山水庫', '翡翠水庫', '石門水庫', '永和山水庫', '寶山水庫', '寶山第二水庫', '明德水庫', '鯉魚潭水庫'
+    , '德基水庫', '石岡壩', '日月潭水庫', '霧社水庫', '湖山水庫', '仁義潭水庫', '蘭潭水庫'
+    , '白河水庫', '曾文水庫', '烏山頭水庫', '南化水庫', '阿公店水庫', '牡丹水庫']
+    for (let i = 0; i < reservoirList.length; i++) {
+      for(let j = 0; j < items.length; j++){
+        userList.push(<li>{items[reservoirList[i]]}</li>)
+      }
+    }
+
+    
+
+    return userList
+  }
+    render(){
+      return(
+        <div>
+          {this.renderLists()}
+        </div>
+      )
+    }
+
+}
+
+
+export default ExploreContainer;
