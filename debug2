@@ -1,0 +1,83 @@
+import React, { Component } from "react";  
+import axios from 'axios';
+import { IonCol, IonContent, IonGrid, IonRow } from "@ionic/react";
+
+class ExploreContainer extends Component{
+
+
+  state = {
+    items: [],
+    item2: [],
+    wname :['石門水庫','翡翠水庫','直潭壩','寶山第二水庫','德基水庫','明湖下池','內埔子','白河水庫','德元埤','烏山頭水庫','曾文水庫',
+    '虎頭埤','鹽水埤','成功水庫','興仁水庫','東衛水庫','赤崁水庫','西安水庫','七美水庫','小池水庫','烏溝蓄水塘',
+   ],
+
+  }
+
+  componentDidMount() {
+     axios.get(`https://fhy.wra.gov.tw/WraApi/v1/Reservoir/Station?$orderby=StationNo`)
+        .then(res => {
+        console.log(res)
+        const items = res.data;
+        this.setState({ items });
+        })
+
+        axios.get(`https://fhy.wra.gov.tw/WraApi/v1/Reservoir/Daily?$orderby=StationNo`)
+        .then(res => {
+        console.log(res)
+        const item2 = res.data;
+        this.setState({ item2 });
+        })
+  }
+    render(){
+      
+      return(
+        <IonContent class="ion-margin" >
+                <IonGrid class="ion-margin">
+                    <IonRow>
+                        <IonCol>
+                            <div>
+                                <h5 style={{color:"red"}}>水庫名稱</h5>
+                                {
+                                    this.state.wname.map((post:any, key) =>{
+                                        return(
+                                            <li style={{height:"30px"}} key={key}>{post}</li>
+                                            )
+                                        })
+                                }
+                            </div>
+                        </IonCol>
+                        <IonCol>
+                            <div>
+                                <h5>本日總進水量(萬立方公尺) </h5>
+                                {
+                                    this.state.item2.map((post:any, key) =>{
+                                        return(
+                                            <li style={{height:"30px"}} key={key}>{post.InflowTotal}</li>
+                                            )
+                                        })
+                                }
+                            </div>
+                        </IonCol>
+                        <IonCol>
+                            <div>
+                                <h5>本日總出水量(萬立方公尺)</h5>
+                                {
+                                    this.state.item2.map((post:any, key) =>{
+                                        return(
+                                            <li style={{height:"30px"}} key={key}>{post.OutflowTotal }</li>
+                                            )
+                                        })
+                                }
+                            </div>
+                        </IonCol>
+                    </IonRow>
+                </IonGrid>
+            </IonContent>
+      )
+    }
+
+}
+
+
+export default ExploreContainer;
